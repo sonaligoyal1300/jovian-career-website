@@ -1,6 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for, request
 
 app = Flask(__name__)
+app.secret_key = "secret key"
 
 JOBS = [{
   'id': 1,
@@ -26,13 +27,21 @@ JOBS = [{
 
 
 @app.route("/")
-def hello_world():
-  return render_template('home.html', jobs=JOBS)
+def world():
+  return render_template('login.html')
+  # return render_template('home.html', jobs=JOBS)
 
 
 @app.route("/test")
-def hell():
-  return render_template('test.html')
+def test():
+  # return render_template('login.html')
+  return render_template('test.html', jobs=JOBS)
+
+
+@app.route("/home")
+def hello_world():
+  return render_template('home.html', jobs=JOBS)
+  # return render_template('home.html')
 
 
 if __name__ == "__main__":
